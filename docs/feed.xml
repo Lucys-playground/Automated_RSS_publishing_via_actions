@@ -8,13 +8,6 @@
     <description>Krátké španělské texty a dialogy pro začátečníky.</description>
     <language>cs</language>
     <atom:link href="https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/feed.xml" rel="self" type="application/rss+xml" />
-  <item>
-    <title>Un café, por favor</title>
-    <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</link>
-    <guid isPermaLink="true">https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</guid>
-    <pubDate>Sun, 19 Apr 2026 06:00:00 +0000</pubDate>
-    <description><![CDATA[<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>]]></description>
-    <content:encoded><![CDATA[<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>]]></content:encoded>
-  </item>
+
   </channel>
 </rss>
