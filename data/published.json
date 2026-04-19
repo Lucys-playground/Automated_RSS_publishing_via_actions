@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "slug": "hola-cafe",
+    "title": "Un café, por favor",
+    "summary": "Velmi krátký dialog v kavárně pro začátečníka.",
+    "published": "2026-04-19T08:00:00+02:00",
+    "path": "/posts/hola-cafe.html",
+    "language": "es",
+    "level": "A1",
+    "html": "<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>"
+  }
+]

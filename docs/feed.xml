@@ -1,1 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Španělština</title>
+    <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/index.html</link>
+    <description>Krátké španělské texty a dialogy pro začátečníky.</description>
+    <language>cs</language>
 
+    <item>
+      <title>Un café, por favor</title>
+      <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</link>
+      <guid>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</guid>
+      <pubDate>Sun, 19 Apr 2026 06:00:00 +0000</pubDate>
+      <description>Velmi krátký dialog v kavárně pro začátečníka.</description>
+    </item>
+  </channel>
+</rss>
