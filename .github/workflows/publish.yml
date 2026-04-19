@@ -1,9 +1,9 @@
-name: Publish scheduled post
+name: Publish daily post
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "5 6 * * *" # každý den v 06:05 UTC
+    - cron: "0 17 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -21,19 +21,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run builder
+      - name: Build site
         env:
-          SITE_URL: "https://lucys-playground.github.io/Automated_RSS_publishing_via_actions"
+          SITE_URL: https://lucys-playground.github.io/Automated_RSS_publishing_via_actions
+          SITE_TITLE: Španělština
+          SITE_DESCRIPTION: Krátké španělské texty a dialogy pro začátečníky.
         run: python scripts/build.py
 
-      - name: Commit and push changes
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/published.json site/
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "Publish scheduled content"
-            git push
-          fi
+          git diff --cached --quiet || git commit -m "Publish daily post"
+          git push
