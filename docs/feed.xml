@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Španělština</title>
     <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/index.html</link>
     <description>Krátké španělské texty a dialogy pro začátečníky.</description>
     <language>cs</language>
+    <atom:link href="https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/feed.xml" rel="self" type="application/rss+xml" />
   <item>
     <title>Un café, por favor</title>
     <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</link>
-    <guid>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</guid>
+    <guid isPermaLink="true">https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html</guid>
     <pubDate>Sun, 19 Apr 2026 06:00:00 +0000</pubDate>
-    <description>Velmi krátký dialog v kavárně pro začátečníka.</description>
+    <description><![CDATA[<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>]]></description>
+    <content:encoded><![CDATA[<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>]]></content:encoded>
   </item>
   </channel>
 </rss>
