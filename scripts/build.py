@@ -18,22 +18,22 @@ POSTS_JSON = DATA_DIR / "posts.json"
 PUBLISHED_JSON = DATA_DIR / "published.json"
 INDEX_HTML = SITE_DIR / "index.html"
 FEED_XML = SITE_DIR / "feed.xml"
+NOJEKYLL = SITE_DIR / ".nojekyll"
 
 SITE_URL = os.getenv("SITE_URL", "").rstrip("/")
-SITE_TITLE = os.getenv("SITE_TITLE", "Španělština každý den")
+SITE_TITLE = os.getenv("SITE_TITLE", "Španělština")
 SITE_DESCRIPTION = os.getenv(
     "SITE_DESCRIPTION",
     "Krátké španělské texty a dialogy pro začátečníky.",
 )
 PUBLISH_TZ = os.getenv("PUBLISH_TZ", "Europe/Prague")
 REBUILD_ALL = os.getenv("REBUILD_ALL", "").strip() == "1"
-TIMEZONE_FALLBACK = timezone.utc
 
 
 def parse_dt(value: str) -> datetime:
     dt = datetime.fromisoformat(value)
     if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=TIMEZONE_FALLBACK)
+        dt = dt.replace(tzinfo=timezone.utc)
     return dt
 
 
@@ -60,6 +60,7 @@ def ensure_dirs() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     SITE_DIR.mkdir(parents=True, exist_ok=True)
     POSTS_DIR.mkdir(parents=True, exist_ok=True)
+    NOJEKYLL.write_text("", encoding="utf-8")
 
 
 def today_iso_date() -> str:
@@ -75,7 +76,7 @@ def today_iso_date() -> str:
     return datetime.now(tz).date().isoformat()
 
 
-def post_url(slug: str) -> str:
+def post_rel_path(slug: str) -> str:
     return f"/posts/{slug}.html"
 
 
@@ -91,6 +92,7 @@ def site_path(path: str) -> str:
 
     parsed = urlparse(SITE_URL)
     base_path = parsed.path.rstrip("/")
+
     if not base_path:
         return normalized
 
@@ -113,13 +115,13 @@ def normalize_posts(raw_posts: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
     for post in raw_posts:
         published_dt = parse_dt(post["published"])
-        normalized = dict(post)
-        normalized["published_dt"] = published_dt
-        normalized["publish_date"] = published_dt.date().isoformat()
-        normalized["path"] = post_url(post["slug"])
-        posts.append(normalized)
+        item = dict(post)
+        item["published_dt"] = published_dt
+        item["publish_date"] = published_dt.date().isoformat()
+        item["path"] = post_rel_path(post["slug"])
+        posts.append(item)
 
-    posts.sort(key=lambda item: item["published_dt"])
+    posts.sort(key=lambda x: x["published_dt"])
     return posts
 
 
@@ -128,13 +130,13 @@ def normalize_published(raw_published: list[dict[str, Any]]) -> list[dict[str, A
 
     for post in raw_published:
         published_dt = parse_dt(post["published"])
-        normalized = dict(post)
-        normalized["published_dt"] = published_dt
-        normalized["publish_date"] = published_dt.date().isoformat()
-        normalized["path"] = post.get("path") or post_url(post["slug"])
-        published.append(normalized)
+        item = dict(post)
+        item["published_dt"] = published_dt
+        item["publish_date"] = published_dt.date().isoformat()
+        item["path"] = post.get("path") or post_rel_path(post["slug"])
+        published.append(item)
 
-    published.sort(key=lambda item: item["published_dt"])
+    published.sort(key=lambda x: x["published_dt"])
     return published
 
 
@@ -149,7 +151,7 @@ def make_entry(post: dict[str, Any]) -> dict[str, Any]:
         "title": post["title"],
         "summary": post.get("summary", ""),
         "published": post["published"],
-        "path": post.get("path") or post_url(post["slug"]),
+        "path": post.get("path") or post_rel_path(post["slug"]),
         "language": post.get("language", ""),
         "level": post.get("level", ""),
         "html": post["html"],
@@ -246,36 +248,38 @@ def render_post_html(
     prev_post: dict[str, Any] | None,
     next_post: dict[str, Any] | None,
 ) -> str:
-    nav_links: list[str] = []
-
-    if prev_post:
-        nav_links.append(
-            "<a href='{href}'>← {title}</a>".format(
-                href=escape(site_path(prev_post["path"])),
-                title=escape(prev_post["title"]),
-            )
-        )
-
-    if next_post:
-        nav_links.append(
-            "<a href='{href}'>{title} →</a>".format(
-                href=escape(site_path(next_post["path"])),
-                title=escape(next_post["title"]),
-            )
-        )
-
-    nav_html = ""
-    if nav_links:
-        nav_html = "    <nav class='post-nav'>\n      " + "\n      ".join(nav_links) + "\n    </nav>\n"
+    meta_parts = [format_human_date(post["published"])]
+    if post.get("language"):
+        meta_parts.append(post["language"])
+    if post.get("level"):
+        meta_parts.append(post["level"])
 
     summary_html = ""
     if post.get("summary"):
         summary_html = f"    <p class='summary'>{escape(post['summary'])}</p>\n"
 
+    nav_html = ""
+    if prev_post or next_post:
+        left = (
+            f"<a href='{escape(site_path(prev_post['path']))}'>← {escape(prev_post['title'])}</a>"
+            if prev_post
+            else "<span></span>"
+        )
+        right = (
+            f"<a href='{escape(site_path(next_post['path']))}'>{escape(next_post['title'])} →</a>"
+            if next_post
+            else "<span></span>"
+        )
+        nav_html = (
+            "    <nav class='post-nav'>\n"
+            f"      {left}\n"
+            f"      {right}\n"
+            "    </nav>\n"
+        )
+
     body = (
         f"    <h1>{escape(post['title'])}</h1>\n"
-        f"    <p class='meta'>{escape(format_human_date(post['published']))} · "
-        f"{escape(post.get('language', ''))} · {escape(post.get('level', ''))}</p>\n"
+        f"    <p class='meta'>{escape(' · '.join(meta_parts))}</p>\n"
         f"{summary_html}"
         "    <div class='content'>\n"
         f"      {post['html']}\n"
@@ -296,9 +300,10 @@ def render_index_html(published: list[dict[str, Any]]) -> str:
     items: list[str] = []
 
     for post in reversed(published):
+        summary = f" – {escape(post['summary'])}" if post.get("summary") else ""
         items.append(
             f'      <li><a href="{escape(site_path(post["path"]))}">{escape(post["title"])}</a> '
-            f'<small>({escape(format_human_date(post["published"]))})</small></li>'
+            f'<small>({escape(format_human_date(post["published"]))})</small>{summary}</li>'
         )
 
     archive_html = "\n".join(items) if items else "      <li>Zatím tu není žádný publikovaný článek.</li>"
@@ -321,6 +326,10 @@ def render_index_html(published: list[dict[str, Any]]) -> str:
     )
 
 
+def cdata(text: str) -> str:
+    return text.replace("]]>", "]]]]><![CDATA[>")
+
+
 def render_feed_xml(published: list[dict[str, Any]]) -> str:
     last_30 = published[-30:]
     items: list[str] = []
@@ -328,28 +337,34 @@ def render_feed_xml(published: list[dict[str, Any]]) -> str:
     for post in reversed(last_30):
         url = full_url(post["path"])
         pub_dt = parse_dt(post["published"]).astimezone(timezone.utc)
-        description = escape(post.get("summary", ""))
+        html_content = post.get("html", "")
+        html_cdata = cdata(html_content)
 
         items.append(
             f"""  <item>
     <title>{escape(post["title"])}</title>
     <link>{escape(url)}</link>
-    <guid>{escape(url)}</guid>
+    <guid isPermaLink="true">{escape(url)}</guid>
     <pubDate>{format_datetime(pub_dt)}</pubDate>
-    <description>{description}</description>
+    <description><![CDATA[{html_cdata}]]></description>
+    <content:encoded><![CDATA[{html_cdata}]]></content:encoded>
   </item>"""
         )
 
     home = full_url("/index.html")
+    self_feed = full_url("/feed.xml")
     xml_items = "\n".join(items)
 
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{escape(SITE_TITLE)}</title>
     <link>{escape(home)}</link>
     <description>{escape(SITE_DESCRIPTION)}</description>
     <language>cs</language>
+    <atom:link href="{escape(self_feed)}" rel="self" type="application/rss+xml" />
 {xml_items}
   </channel>
 </rss>
@@ -388,16 +403,14 @@ def main() -> None:
         for idx in range(len(published)):
             render_post_neighbors(published, idx)
     elif changed:
-        current_index = next(
-            i for i, item in enumerate(published) if item["slug"] == todays_post["slug"]
-        )
+        current_index = next(i for i, item in enumerate(published) if item["slug"] == todays_post["slug"])
         for idx in {current_index - 1, current_index, current_index + 1}:
             if 0 <= idx < len(published):
                 render_post_neighbors(published, idx)
     elif published:
         latest_index = len(published) - 1
-        latest_post_path = post_output_path(published[latest_index]["slug"])
-        if not latest_post_path.exists():
+        latest_path = post_output_path(published[latest_index]["slug"])
+        if not latest_path.exists():
             render_post_neighbors(published, latest_index)
 
     save_json(PUBLISHED_JSON, serialize_published(published))
