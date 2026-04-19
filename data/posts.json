@@ -1,8 +1,20 @@
-
-{
-  "slug": "hola-cafe",
-  "title": "Un café, por favor",
-  "summary": "...",
-  "published": "2026-04-19T08:00:00+02:00",
-  "html": "<p>...</p>"
-}
+[
+  {
+    "slug": "hola-cafe",
+    "title": "Un café, por favor",
+    "summary": "Velmi krátký dialog v kavárně pro začátečníka.",
+    "published": "2026-04-19T08:00:00+02:00",
+    "language": "es",
+    "level": "A1",
+    "html": "<p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>"
+  },
+  {
+    "slug": "en-la-estacion",
+    "title": "¿Dónde está la estación?",
+    "summary": "Krátký dialog na ulici o cestě na nádraží.",
+    "published": "2026-04-20T08:00:00+02:00",
+    "language": "es",
+    "level": "A1",
+    "html": "<p><strong>Turista:</strong> Perdón, ¿dónde está la estación?</p><p><strong>Señora:</strong> Siga recto y luego gire a la izquierda.</p><p><strong>Turista:</strong> Muchas gracias.</p><p><strong>Señora:</strong> De nada.</p><hr><p><em>Česky:</em> Promiňte, kde je nádraží? — Jděte rovně a pak zahněte doleva. — Moc děkuji. — Není zač.</p>"
+  }
+]
