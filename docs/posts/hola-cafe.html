@@ -5,43 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Un café, por favor</title>
   <meta name="description" content="Velmi krátký dialog v kavárně pro začátečníka.">
+  <link rel="canonical" href="https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/hola-cafe.html">
+  <link rel="alternate" type="application/rss+xml" title="Španělština" href="https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/feed.xml">
   <style>
+    :root { color-scheme: light dark; }
     body {
-      font-family: system-ui, sans-serif;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background: #ffffff;
+      color: #1f2937;
+    }
+    main {
       max-width: 760px;
       margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-      line-height: 1.65;
+      padding: 32px 20px 56px;
     }
-    h1 { line-height: 1.2; margin-bottom: 0.4rem; }
-    .meta { color: #555; margin-bottom: 2rem; font-size: 0.95rem; }
-    .content { margin-bottom: 2rem; }
-    .post-nav {
+    h1 {
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+    .summary {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    .content {
+      margin: 1.5rem 0 2rem;
+    }
+    nav.post-nav {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #ddd;
+      gap: 16px;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    a {
+      color: #0f766e;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    ul.archive {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin: 0.35rem 0;
+    }
+    .back {
       margin-top: 2rem;
     }
-    .post-nav-left, .post-nav-right { flex: 1; }
-    .post-nav-right { text-align: right; }
-    .nav-link { text-decoration: none; }
-    a { color: #0b57d0; }
-    .back { margin-top: 2rem; display: inline-block; }
   </style>
 </head>
 <body>
   <main>
-    <article>
-      <h1>Un café, por favor</h1>
-      <div class="meta">19.04.2026 · es · A1</div>
-      <div class="content">
-        <p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>
-      </div>
-      
-      <p><a class="back" href="/index.html">← Zpět na archiv</a></p>
-    </article>
+    <h1>Un café, por favor</h1>
+    <p class='meta'>19.04.2026 · es · A1</p>
+    <p class='summary'>Velmi krátký dialog v kavárně pro začátečníka.</p>
+    <div class='content'>
+      <p><strong>Camarero:</strong> Buenos días. ¿Qué desea?</p><p><strong>Ana:</strong> Un café con leche, por favor.</p><p><strong>Camarero:</strong> Claro. ¿Algo más?</p><p><strong>Ana:</strong> No, gracias.</p><hr><p><em>Česky:</em> Dobré ráno. Co si přejete? — Jednu kávu s mlékem, prosím. — Ještě něco? — Ne, děkuji.</p>
+    </div>
+    <p class='back'><a href='/Automated_RSS_publishing_via_actions/index.html'>← Zpět na archiv</a></p>
+
   </main>
 </body>
 </html>
