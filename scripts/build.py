@@ -11,7 +11,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
-SITE_DIR = ROOT / "site"
+SITE_DIR = ROOT / "docs"
 POSTS_DIR = SITE_DIR / "posts"
 
 POSTS_JSON = DATA_DIR / "posts.json"
