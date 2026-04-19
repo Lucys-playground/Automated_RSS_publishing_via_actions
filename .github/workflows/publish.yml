@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -26,6 +26,7 @@ jobs:
           SITE_URL: https://lucys-playground.github.io/Automated_RSS_publishing_via_actions
           SITE_TITLE: Španělština
           SITE_DESCRIPTION: Krátké španělské texty a dialogy pro začátečníky.
+          PUBLISH_DATE: 2026-04-19
         run: python scripts/build.py
 
       - name: Commit changes
