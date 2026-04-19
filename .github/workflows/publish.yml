@@ -2,8 +2,19 @@ name: Publish daily post
 
 on:
   schedule:
-    - cron: "55 13 * * *"
+    - cron: "5 8 * * *"
+      timezone: "Europe/Prague"
   workflow_dispatch:
+    inputs:
+      publish_date:
+        description: "Volitelně datum YYYY-MM-DD pro ruční test"
+        required: false
+        type: string
+      rebuild_all:
+        description: "Přegenerovat všechny už publikované HTML stránky"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -26,7 +37,9 @@ jobs:
           SITE_URL: https://lucys-playground.github.io/Automated_RSS_publishing_via_actions
           SITE_TITLE: Španělština
           SITE_DESCRIPTION: Krátké španělské texty a dialogy pro začátečníky.
-          PUBLISH_DATE: 2026-04-19
+          PUBLISH_TZ: Europe/Prague
+          PUBLISH_DATE: ${{ github.event.inputs.publish_date || '' }}
+          REBUILD_ALL: ${{ github.event.inputs.rebuild_all == 'true' && '1' || '' }}
         run: python scripts/build.py
 
       - name: Commit changes
