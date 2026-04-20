@@ -8,6 +8,13 @@
     <description>Krátké španělské texty a dialogy pro začátečníky.</description>
     <language>cs</language>
     <atom:link href="https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/feed.xml" rel="self" type="application/rss+xml" />
-
+  <item>
+    <title>¡Feliz santo!</title>
+    <link>https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/feliz-santo.html</link>
+    <guid isPermaLink="true">https://lucys-playground.github.io/Automated_RSS_publishing_via_actions/posts/feliz-santo.html</guid>
+    <pubDate>Mon, 20 Apr 2026 04:05:00 +0000</pubDate>
+    <description><![CDATA[<div lang="es"><p>Hola, hoy es un día especial.</p><p>¡Feliz santo!</p><p>Te deseo alegría, salud y un día muy bonito.</p><p>Gracias por estar aquí.</p><p>Un abrazo.</p><div style="margin-top: 85vh;" lang="cs"><hr><p><strong>Česky:</strong></p><p>Ahoj, dnes je zvláštní den.</p><p>Všechno nejlepší k svátku!</p><p>Přeji ti radost, zdraví a moc hezký den.</p><p>Děkuji, že jsi tady.</p><p>Objetí.</p></div></div>]]></description>
+    <content:encoded><![CDATA[<div lang="es"><p>Hola, hoy es un día especial.</p><p>¡Feliz santo!</p><p>Te deseo alegría, salud y un día muy bonito.</p><p>Gracias por estar aquí.</p><p>Un abrazo.</p><div style="margin-top: 85vh;" lang="cs"><hr><p><strong>Česky:</strong></p><p>Ahoj, dnes je zvláštní den.</p><p>Všechno nejlepší k svátku!</p><p>Přeji ti radost, zdraví a moc hezký den.</p><p>Děkuji, že jsi tady.</p><p>Objetí.</p></div></div>]]></content:encoded>
+  </item>
   </channel>
 </rss>
